@@ -7,12 +7,13 @@ import xbmc
 bulb1 = "192.168.5.110"
 bulb2 = "192.168.5.111"
 bulb3 = "192.168.5.112"
-bulb4 = "192.168.4.232"
+bulb4 = "192.168.5.113"
+
+port=55443
 #-------------------------------------------------------------------------
 #Method of yeelight
 
 def operate_on_bulb(ip, method, params):
-	port=55443
 	try:
 		tcp_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		tcp_socket.settimeout(2)
