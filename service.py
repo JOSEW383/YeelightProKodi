@@ -12,22 +12,22 @@ bulb4 = "192.168.4.232"
 #Method of yeelight
 
 def operate_on_bulb(ip, method, params):
-  port=55443
-  try:
-    tcp_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    print "Send to ",ip, port ,"..."
-    tcp_socket.connect((ip, int(port)))
+	port=55443
+	try:
+		tcp_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		tcp_socket.settimeout(2)
+		print "Send to ",ip, port ,"..."
+		tcp_socket.connect((ip, int(port)))
 
-    #msg2="{\"id\": 192.168.4.234, \"method\": \"set_rgb\", \"params\":[\"65280\", \"sudden\", 500]}\r\n"
+		#msg2="{\"id\": 192.168.4.234, \"method\": \"set_rgb\", \"params\":[\"65280\", \"sudden\", 500]}\r\n"
 
-    msg="{\"id\":" + str(ip) + ",\"method\":\""
-    msg += method + "\",\"params\":[" + params + "]}\r\n"
+		msg="{\"id\":" + str(ip) + ",\"method\":\""
+		msg += method + "\",\"params\":[" + params + "]}\r\n"
 
-    tcp_socket.send(msg)
-    tcp_socket.close()
-  except Exception as e:
-    print "An error has ocurred:", e
-
+		tcp_socket.send(msg)
+		tcp_socket.close()
+	except Exception as e:
+		print "An error has ocurred:", e
 
 def set_rgb(ip, color):
     #white 16777215 blue 255 green 65280 red 16711680 pink 16711935 yellow 16776960 turquoise 65535
@@ -65,7 +65,7 @@ def turn_off_all():
     turn_off(bulb4)
 
 def setMovieScene():
-    #turn_off_all()
+    turn_off_all()
     turn_on(bulb4)
     set_rgb(bulb4,9599999)
     set_bright(bulb4,50)
