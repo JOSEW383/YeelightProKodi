@@ -108,11 +108,21 @@ def turn_off_all():
 #Scenes
 def setMovieScene3():
     turn_off_all()
+    turn_on(bulb3)
+    set_rgb(bulb3,9599999)
+    set_bright(bulb3,20)
+
+def setDefaultScene3():
+    set_rgb(bulb3,16777215)
+    set_bright(bulb4,100)
+
+def setMovieScene4():
+    turn_off_all()
     turn_on(bulb4)
     set_rgb(bulb4,9599999)
     set_bright(bulb4,50)
 
-def setDefaultScene3():
+def setDefaultScene4():
     set_rgb(bulb4,16777215)
     set_bright(bulb4,100)
 
@@ -121,10 +131,10 @@ def setDefaultScene3():
 #List of conditions: http://kodi.wiki/view/List_of_boolean_conditions
 isPlaying = False
 while True:
-    if xbmc.getCondVisibility('Player.Playing'):
-        setMovieScene()
+    if xbmc.getCondVisibility('Player.Playing') and not isPlaying:
+        setMovieScene4()
         isPlaying=True
-    elif isPlaying == True:
-        setDefaultScene()
+    elif not xbmc.getCondVisibility('Player.Playing') and  isPlaying == True:
+        setDefaultScene4()
         isPlaying=False
-    time.sleep(10)
+    sleep(10)
