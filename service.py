@@ -48,11 +48,11 @@ def toggle(ip):
     operate_on_bulb(ip,"toggle","")
 
 def turn_on(ip):
-    params="\"on\",\"sudden\",500"
+    params="\"on\",\"smooth\",500"
     operate_on_bulb(ip,"set_power",params)
 
 def turn_off(ip):
-    params="\"off\",\"sudden\",500"
+    params="\"off\",\"smooth\",500"
     operate_on_bulb(ip,"set_power",params)
 
 #-------------------------------------------------------------------------
