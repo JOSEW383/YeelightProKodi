@@ -1,7 +1,8 @@
-import time
+import re
 import socket
+from time import sleep
+from ast import literal_eval
 import xbmc
-
 #-------------------------------------------------------------------------
 #List of light bulbs
 bulb1 = "192.168.5.110"
@@ -10,8 +11,40 @@ bulb3 = "192.168.5.112"
 bulb4 = "192.168.5.113"
 
 port=55443
+
+#List of colors
+white=16777215
+blue=255
+green=65280
+red=16711680
+pink=16711935
+yellow=16776960
+turquoise=65535
 #-------------------------------------------------------------------------
-#Method of yeelight
+#Methods of yeelight
+
+#TO DO
+def get_param_value(data, info):
+    dictionary = literal_eval(data[0])
+    value = dictionary["result"]
+    if info == "power":
+        return value[0]
+    elif info == "bright":
+        return value[1]
+    elif info == "rgb":
+        return value[2]
+    else:
+        return "error"
+
+#info= power / bright / rgb
+def get_info(ip,info):
+    tcp_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    tcp_socket.settimeout(2)
+    tcp_socket.connect((ip, int(port)))
+    tcp_socket.send("{\"id\":" + ip + ", \"method\":\"get_prop\", \"params\":[\"power\", \"bright\", \"rgb\"]}\r\n")
+    data = tcp_socket.recvfrom(2048)
+    tcp_socket.close()
+    return get_param_value(data,info)
 
 def operate_on_bulb(ip, method, params):
 	try:
@@ -59,19 +92,27 @@ def turn_off(ip):
 #-------------------------------------------------------------------------
 #Voids witch all light bulbs
 
+def turn_on_all():
+    turn_on(bulb1)
+    turn_on(bulb2)
+    turn_on(bulb3)
+    turn_on(bulb4)
+
 def turn_off_all():
     turn_off(bulb1)
     turn_off(bulb2)
     turn_off(bulb3)
     turn_off(bulb4)
 
-def setMovieScene():
+#-------------------------------------------------------------------------
+#Scenes
+def setMovieScene3():
     turn_off_all()
     turn_on(bulb4)
     set_rgb(bulb4,9599999)
     set_bright(bulb4,50)
 
-def setDefaultScene():
+def setDefaultScene3():
     set_rgb(bulb4,16777215)
     set_bright(bulb4,100)
 
