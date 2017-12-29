@@ -38,13 +38,16 @@ def get_param_value(data, info):
 
 #info= power / bright / rgb
 def get_info(ip,info):
-    tcp_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    tcp_socket.settimeout(2)
-    tcp_socket.connect((ip, int(port)))
-    tcp_socket.send("{\"id\":" + ip + ", \"method\":\"get_prop\", \"params\":[\"power\", \"bright\", \"rgb\"]}\r\n")
-    data = tcp_socket.recvfrom(2048)
-    tcp_socket.close()
-    return get_param_value(data,info)
+    try:
+        tcp_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        tcp_socket.settimeout(2)
+        tcp_socket.connect((ip, int(port)))
+        tcp_socket.send("{\"id\":" + ip + ", \"method\":\"get_prop\", \"params\":[\"power\", \"bright\", \"rgb\"]}\r\n")
+        data = tcp_socket.recvfrom(2048)
+        tcp_socket.close()
+        return get_param_value(data,info)
+    except Exception as e:
+        return "empty"
 
 def operate_on_bulb(ip, method, params):
 	try:
