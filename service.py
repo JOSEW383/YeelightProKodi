@@ -137,14 +137,14 @@ bulb4 = get_info(bulb4,"power")
 while True:
     if xbmc.getCondVisibility('Player.Playing') and not isPlaying:
         if bulb4 == "empty":
-            setMovieScene4()
-        else:
             setMovieScene3()
+        else:
+            setDefaultScene3()
         isPlaying=True
     elif not xbmc.getCondVisibility('Player.Playing') and  isPlaying == True:
         if bulb4 == "empty":
-            setDefaultScene4()
+            setMovieScene4()
         else:
-            setDefaultScene3()
+            setDefaultScene4()
         isPlaying=False
     sleep(10)
