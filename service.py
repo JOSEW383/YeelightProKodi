@@ -20,6 +20,7 @@ red=16711680
 pink=16711935
 yellow=16776960
 turquoise=65535
+film=9599999
 #-------------------------------------------------------------------------
 #Methods of yeelight
 
@@ -112,21 +113,21 @@ def turn_off_all():
 def setMovieScene3():
     turn_off_all()
     turn_on(bulb3)
-    set_rgb(bulb3,9599999)
+    set_rgb(bulb3,film)
     set_bright(bulb3,20)
 
 def setDefaultScene3():
-    set_rgb(bulb3,16777215)
-    set_bright(bulb4,100)
+    set_rgb(bulb3,white)
+    set_bright(bulb3,50)
 
 def setMovieScene4():
     turn_off_all()
     turn_on(bulb4)
-    set_rgb(bulb4,9599999)
+    set_rgb(bulb4,film)
     set_bright(bulb4,50)
 
 def setDefaultScene4():
-    set_rgb(bulb4,16777215)
+    set_rgb(bulb4,white)
     set_bright(bulb4,100)
 
 #-------------------------------------------------------------------------
