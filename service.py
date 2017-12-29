@@ -134,10 +134,10 @@ def setDefaultScene4():
 #MAIN OF YEELIGHTPRO
 #List of conditions: http://kodi.wiki/view/List_of_boolean_conditions
 isPlaying = False
-state_bulb4 = get_info(bulb4,"power")
 while True:
     #VIDEO PLAYING
     if xbmc.getCondVisibility('Player.Playing') and not isPlaying:
+        state_bulb4 = get_info(bulb4,"power")
         if state_bulb4 == "empty":
             setMovieScene3()
         else:
