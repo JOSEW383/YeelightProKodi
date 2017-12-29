@@ -136,15 +136,17 @@ def setDefaultScene4():
 isPlaying = False
 bulb4 = get_info(bulb4,"power")
 while True:
+    #VIDEO PLAYING
     if xbmc.getCondVisibility('Player.Playing') and not isPlaying:
         if bulb4 == "empty":
             setMovieScene3()
         else:
-            setDefaultScene3()
+            setMovieScene4()
         isPlaying=True
+    #VIDEO PAUSED
     elif not xbmc.getCondVisibility('Player.Playing') and  isPlaying == True:
         if bulb4 == "empty":
-            setMovieScene4()
+            setDefaultScene3()
         else:
             setDefaultScene4()
         isPlaying=False
