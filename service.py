@@ -137,7 +137,7 @@ def setDefaultScene4():
 isPlaying = False
 while True:
     hour = int(strftime("%H%M"))
-    if hour>1730:
+    if hour<800 or hour>1530:
         #VIDEO PLAYING
         if xbmc.getCondVisibility('Player.Playing') and not isPlaying:
             state_bulb4 = get_info(bulb4,"power")
