@@ -136,8 +136,9 @@ def setDefaultScene4():
 #List of conditions: http://kodi.wiki/view/List_of_boolean_conditions
 isPlaying = False
 while True:
+    #Bulbs turn on wich time it is between 17:30 - 8:00
     hour = int(strftime("%H%M"))
-    if hour<800 or hour>1530:
+    if hour<800 or hour>1730:
         #VIDEO PLAYING
         if xbmc.getCondVisibility('Player.Playing') and not isPlaying:
             state_bulb4 = get_info(bulb4,"power")
