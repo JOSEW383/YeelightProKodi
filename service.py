@@ -1,6 +1,7 @@
 import re
 import socket
 from time import sleep
+from time import strftime
 from ast import literal_eval
 import xbmc
 #-------------------------------------------------------------------------
@@ -135,19 +136,21 @@ def setDefaultScene4():
 #List of conditions: http://kodi.wiki/view/List_of_boolean_conditions
 isPlaying = False
 while True:
-    #VIDEO PLAYING
-    if xbmc.getCondVisibility('Player.Playing') and not isPlaying:
-        state_bulb4 = get_info(bulb4,"power")
-        if state_bulb4 == "empty":
-            setMovieScene3()
-        else:
-            setMovieScene4()
-        isPlaying=True
-    #VIDEO PAUSED
-    elif not xbmc.getCondVisibility('Player.Playing') and  isPlaying == True:
-        if state_bulb4 == "empty":
-            setDefaultScene3()
-        else:
-            setDefaultScene4()
-        isPlaying=False
+    hour = int(strftime("%H%M"))
+    if hour>1730:
+        #VIDEO PLAYING
+        if xbmc.getCondVisibility('Player.Playing') and not isPlaying:
+            state_bulb4 = get_info(bulb4,"power")
+            if state_bulb4 == "empty":
+                setMovieScene3()
+            else:
+                setMovieScene4()
+            isPlaying=True
+        #VIDEO PAUSED
+        elif not xbmc.getCondVisibility('Player.Playing') and  isPlaying == True:
+            if state_bulb4 == "empty":
+                setDefaultScene3()
+            else:
+                setDefaultScene4()
+            isPlaying=False
     sleep(10)
