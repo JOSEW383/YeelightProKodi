@@ -147,7 +147,7 @@ while True:
             else:
                 setMovieScene4()
             isPlaying=True
-        #VIDEO PAUSED
+        #NOT VIDEO PLAYING
         elif not xbmc.getCondVisibility('Player.Playing') and  isPlaying == True:
             if state_bulb4 == "empty":
                 setDefaultScene3()
